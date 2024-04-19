@@ -8,7 +8,7 @@ namespace BigBadCat //My Wumpus World implementation
 {
     internal class Program
     {
-        public static int score = 100; //our initial score
+        public static int score = 6000; //our initial score
 
         public static char[,,] maps = { { //our predefined maps
                 { 'V', 'E', '0', 'V' }, 
@@ -53,7 +53,7 @@ namespace BigBadCat //My Wumpus World implementation
                     Task.Delay(1000).Wait(); //every second
                     score -= 100; //decrease score with time
                     if (score <= 0)
-                        break; //break loop when time is over
+                        break; //break loop when time is over (1 min)
                 }
             });
             Game.gameOn = false; //stop the game loop
