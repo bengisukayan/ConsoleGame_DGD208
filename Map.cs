@@ -83,11 +83,11 @@ public class Map
         char symbol = map[coord_y, coord_x];
 
         if (symbol == cat.symbol) //checking where player stands and if the game is over
-            cat.GameOver();
+            Game.GameOver('C');
         else if (symbol == vomit.symbol)
-            vomit.GameOver();
-        else if (symbol == exit.symbol) 
-            exit.GameOver();
+            Game.GameOver('V');
+        else if (symbol == exit.symbol)
+            Game.GameOver('E');
 
         if (coord_y != 0 && map[coord_y - 1, coord_x] == cat.symbol) //checking upper tile, if it is not a border
             cat.SpecialMessage();

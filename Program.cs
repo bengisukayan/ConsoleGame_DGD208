@@ -106,6 +106,27 @@ namespace BigBadCat //My Wumpus World implementation
                     }
                 }
             }
-        }   
+
+            public static void GameOver(char tile)
+            {
+                Console.Clear(); //clearing terminal
+
+                switch (tile) //compare for specific game over message
+                {
+                    case 'E': //case exit, winning condition
+                        Console.WriteLine("Good job! You are rich now, you've found the Golden Claw!");
+                        Console.WriteLine($"Your Score is: {score}");
+                        break;
+                    case 'C': //case waking up the cat
+                        Console.WriteLine("Game over! You woke the Big Bad Cat!");
+                        break;
+                    case 'V': //case stepping on vomit
+                        Console.WriteLine("Game over! You stepped on a very hazardous vomit!");
+                        break;
+                }
+                Thread.Sleep(3000); //waiting 3 seconds
+                Game.gameOn = false; //stopping the game loop
+            }
+        }  
     }
 }
