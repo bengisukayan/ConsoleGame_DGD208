@@ -83,11 +83,20 @@ public class Map
         char symbol = map[coord_y, coord_x];
 
         if (symbol == cat.symbol) //checking where player stands and if the game is over
+        {
             Game.GameOver('C');
+            return; //return so special messages won't show
+        } 
         else if (symbol == vomit.symbol)
+        {
             Game.GameOver('V');
+            return;
+        }
         else if (symbol == exit.symbol)
+        {
             Game.GameOver('E');
+            return;
+        }
 
         if (coord_y != 0 && map[coord_y - 1, coord_x] == cat.symbol) //checking upper tile, if it is not a border
             cat.SpecialMessage();
@@ -109,31 +118,4 @@ public class Map
         else if (coord_x != 3 && map[coord_y, coord_x + 1] == vomit.symbol)
             vomit.SpecialMessage();
     }
-
-    /* maybe could use map generation, but needs error checks
-    private void generateMap()
-    {
-        Random random = new Random();
-        int num = random.Next(1, 17);
-        map[num / 4, (num % 4) - 1] = 'P';
-
-        num = random.Next(1, 17);
-        while (map[num / 4, (num % 4) - 1] != 0)
-            num = random.Next(1, 17);
-        map[num / 4, (num % 4) - 1] = 'C';
-
-        for (int j = 3; j > 0; j--)
-        {
-            num = random.Next(1, 17);
-            while (map[num / 4, (num % 4) - 1] != 0)
-                num = random.Next(1, 17);
-            map[num / 4, (num % 4) - 1] = 'V';
-        }
-
-        num = random.Next(1, 17);
-        while (map[num / 4, (num % 4) - 1] != 0)
-            num = random.Next(1, 17);
-        map[num / 4, (num % 4) - 1] = 'E';
-    }
-    */
 }

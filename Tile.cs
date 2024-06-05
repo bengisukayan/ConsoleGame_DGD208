@@ -24,7 +24,7 @@ public class Vomit : Tile
 
     public void SpecialMessage()
     {
-        Console.WriteLine("You smeel a very asidic smell nearby...");
+        Console.WriteLine("You smell a very asidic smell nearby...");
     }
 }
 public class Exit : Tile

@@ -9,6 +9,7 @@ namespace BigBadCat //My Wumpus World implementation
     internal class Program
     {
         public static int score = 6000; //our initial score
+        public static string playerName = "DefaultPlayer"; //player's name for score keeping
 
         public static char[,,] maps = { { //our predefined maps
                 { 'V', 'E', '0', 'V' }, 
@@ -52,13 +53,13 @@ namespace BigBadCat //My Wumpus World implementation
                 {
                     Task.Delay(1000).Wait(); //every second
                     score -= 100; //decrease score with time
-                    if (score <= 0)
-                        break; //break loop when time is over (1 min)
+                    if (score <= 0) //when time is over (1 min)
+                    {
+                        Game.GameOver('T');
+                        break;
+                    }
                 }
             });
-            Game.gameOn = false; //stop the game loop
-            Console.Clear();
-            Console.WriteLine("Time out!");
         }
         public class Game
         {
@@ -68,7 +69,13 @@ namespace BigBadCat //My Wumpus World implementation
 
             public void InitGame()
             {
-                Console.WriteLine("Welcome to BigBadCat game! You are searching this evil big cat's lair for legendary Golden Claw.\nTry not to wake the cat or step on asidic vomit!"); //printing instructions
+                Console.WriteLine("Please enter your nickname: "); //asking and saving players name
+                playerName = Console.ReadLine();
+                if (playerName == "") //if no input for name assign default name for player
+                    playerName = "DefaultPlayer";
+                Console.Clear(); //clear console
+
+                Console.WriteLine($"Welcome to BigBadCat game {playerName}! You are searching this evil big cat's lair for legendary Golden Claw.\nTry not to wake the cat or step on asidic vomit!"); //printing instructions
                 Console.WriteLine("Type 'w, a, s, d' to move and 'exit' to terminate. Use 'help' if you forget the commands.");
                 Console.WriteLine("Please wait...");
                 Thread.Sleep(6000); //wait for 6 seconds
@@ -111,21 +118,30 @@ namespace BigBadCat //My Wumpus World implementation
             {
                 Console.Clear(); //clearing terminal
 
+                ScoreManager scoreManagerInstance = ScoreManager.GetInstance();
                 switch (tile) //compare for specific game over message
                 {
                     case 'E': //case exit, winning condition
                         Console.WriteLine("Good job! You are rich now, you've found the Golden Claw!");
                         Console.WriteLine($"Your Score is: {score}");
+                        scoreManagerInstance.SaveScore(playerName, score); //save score
                         break;
                     case 'C': //case waking up the cat
-                        Console.WriteLine("Game over! You woke the Big Bad Cat!");
+                        Console.WriteLine("Game over! You woke the Big Bad Cat! No score for you!");
                         break;
                     case 'V': //case stepping on vomit
-                        Console.WriteLine("Game over! You stepped on a very hazardous vomit!");
+                        Console.WriteLine("Game over! You stepped on a very hazardous vomit! No score for you!");
+                        break;
+                    case 'T': //case time out
+                        Console.WriteLine("Time out! No score for you.");
                         break;
                 }
-                Thread.Sleep(3000); //waiting 3 seconds
                 Game.gameOn = false; //stopping the game loop
+
+                var highScore = scoreManagerInstance.GetHighScore(); //get and show highest score
+                Console.WriteLine($"Highest Score: {highScore.playerName} with {highScore.score} score");
+                Thread.Sleep(4000); //waiting 4 seconds
+                Environment.Exit(0); //closing the app altogether to fix timeout bug
             }
         }  
     }
