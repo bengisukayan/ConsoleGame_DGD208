@@ -139,7 +139,8 @@ namespace BigBadCat //My Wumpus World implementation
                 Game.gameOn = false; //stopping the game loop
 
                 var highScore = scoreManagerInstance.GetHighScore(); //get and show highest score
-                Console.WriteLine($"Highest Score: {highScore.playerName} with {highScore.score} score");
+                if (highScore.score != 0) //check if highscore exist yet
+                    Console.WriteLine($"Highest Score: {highScore.playerName} with {highScore.score} score");
                 Thread.Sleep(4000); //waiting 4 seconds
                 Environment.Exit(0); //closing the app altogether to fix timeout bug
             }
