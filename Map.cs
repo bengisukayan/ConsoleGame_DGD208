@@ -77,45 +77,46 @@ public class Map
 
     private void checkSurroundings()
     {
-        Cat cat = new Cat();
-        Vomit vomit = new Vomit();
-        Exit exit = new Exit();
+        TileFactory factory = new TileFactory(); //create tile factory
+        ITile cat = factory.CreateTile("cat");
+        ITile vomit = factory.CreateTile("vomit");
+        ITile exit = factory.CreateTile("exit");
         char symbol = map[coord_y, coord_x];
 
-        if (symbol == cat.symbol) //checking where player stands and if the game is over
+        if (symbol == cat.Symbol) //checking where player stands and if the game is over
         {
             Game.GameOver('C');
-            return; //return so special messages won't show
+            return; //return so special messages won't show after finishing
         } 
-        else if (symbol == vomit.symbol)
+        else if (symbol == vomit.Symbol)
         {
             Game.GameOver('V');
             return;
         }
-        else if (symbol == exit.symbol)
+        else if (symbol == exit.Symbol)
         {
             Game.GameOver('E');
             return;
         }
 
-        if (coord_y != 0 && map[coord_y - 1, coord_x] == cat.symbol) //checking upper tile, if it is not a border
+        if (coord_y != 0 && map[coord_y - 1, coord_x] == cat.Symbol) //checking upper tile, if it is not a border
             cat.SpecialMessage();
-        else if (coord_y != 0 && map[coord_y - 1, coord_x] == vomit.symbol)
+        else if (coord_y != 0 && map[coord_y - 1, coord_x] == vomit.Symbol)
             vomit.SpecialMessage();
 
-        if (coord_y != 3 && map[coord_y + 1, coord_x] == cat.symbol) //checking down tile, if it is not a border
+        if (coord_y != 3 && map[coord_y + 1, coord_x] == cat.Symbol) //checking down tile, if it is not a border
             cat.SpecialMessage();
-        else if (coord_y != 3 && map[coord_y + 1, coord_x] == vomit.symbol)
+        else if (coord_y != 3 && map[coord_y + 1, coord_x] == vomit.Symbol)
             vomit.SpecialMessage();
 
-        if (coord_x != 0 && map[coord_y, coord_x - 1] == cat.symbol) //checking left tile, if it is not a border
+        if (coord_x != 0 && map[coord_y, coord_x - 1] == cat.Symbol) //checking left tile, if it is not a border
             cat.SpecialMessage();
-        else if (coord_x != 0 && map[coord_y, coord_x - 1] == vomit.symbol)
+        else if (coord_x != 0 && map[coord_y, coord_x - 1] == vomit.Symbol)
             vomit.SpecialMessage();
 
-        if (coord_x != 3 && map[coord_y, coord_x + 1] == cat.symbol) //checking right tile, if it is not a border
+        if (coord_x != 3 && map[coord_y, coord_x + 1] == cat.Symbol) //checking right tile, if it is not a border
             cat.SpecialMessage();
-        else if (coord_x != 3 && map[coord_y, coord_x + 1] == vomit.symbol)
+        else if (coord_x != 3 && map[coord_y, coord_x + 1] == vomit.Symbol)
             vomit.SpecialMessage();
     }
 }

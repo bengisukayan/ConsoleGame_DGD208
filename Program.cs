@@ -75,7 +75,7 @@ namespace BigBadCat //My Wumpus World implementation
                     playerName = "DefaultPlayer";
                 Console.Clear(); //clear console
 
-                Console.WriteLine($"Welcome to BigBadCat game {playerName}! You are searching this evil big cat's lair for legendary Golden Claw.\nTry not to wake the cat or step on asidic vomit!"); //printing instructions
+                Console.WriteLine($"Welcome to BigBadCat game {playerName}! You are searching this evil big cat's lair for legendary Golden Claw.\nTry not to wake the cat or step on asidic vomit!"); //printing instructions and story
                 Console.WriteLine("Type 'w, a, s, d' to move and 'exit' to terminate. Use 'help' if you forget the commands.");
                 Console.WriteLine("Please wait...");
                 Thread.Sleep(6000); //wait for 6 seconds
@@ -118,8 +118,8 @@ namespace BigBadCat //My Wumpus World implementation
             {
                 Console.Clear(); //clearing terminal
 
-                ScoreManager scoreManagerInstance = ScoreManager.GetInstance();
-                switch (tile) //compare for specific game over message
+                ScoreManager scoreManagerInstance = ScoreManager.GetInstance(); //get score manager
+                switch (tile) //compare for specific game over message and print
                 {
                     case 'E': //case exit, winning condition
                         Console.WriteLine("Good job! You are rich now, you've found the Golden Claw!");

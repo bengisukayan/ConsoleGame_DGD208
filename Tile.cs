@@ -1,34 +1,50 @@
 ﻿using static BigBadCat.Program;
 
-public class Tile //Tile object I used as an interface, not exactly but kind of, as I never used Tile as it's own.
+public interface ITile //Tile interface for Factory design pattern
 {
-    public char symbol = '0';
-    public void SpecialMessage()
-    {
-        Console.WriteLine("Nearby tile message");
-    }
+    char Symbol { get; } //expression-bodied property
+    void SpecialMessage(); //method to implement
 }
 
-public class Cat : Tile //inheriting from the Tile class.
+public class Cat : ITile //implementing the ITile interface
 {
-    public char symbol = 'C';  //overriding variables
+    public char Symbol => 'C';  //implement variables
 
-    public void SpecialMessage() //overriding SpecialMessage() function
+    public void SpecialMessage() //implement SpecialMessage() function
     {
         Console.WriteLine("You hear a dangerous purring...");
     }
 }
-public class Vomit : Tile
+public class Vomit : ITile
 {
-    public char symbol = 'V';
+    public char Symbol => 'V';
 
     public void SpecialMessage()
     {
         Console.WriteLine("You smell a very asidic smell nearby...");
     }
 }
-public class Exit : Tile
+public class Exit : ITile
 {
-    public char symbol = 'E';
+    public char Symbol => 'E';
+    public void SpecialMessage() {}
 
+}
+
+public class TileFactory //tile creation factory
+{
+    public ITile CreateTile(string type)
+    {
+        switch(type) //check which object we are creating
+        {
+            case "cat":
+                return new Cat();
+            case "vomit":
+                return new Vomit();
+            case "exit":
+                return new Exit();
+            default:
+                throw new ArgumentException("Invalid tile type"); //throw exception in case of invalid tile name. Actually can command this line, as we don't creates tiles by input
+        };
+    }
 }
