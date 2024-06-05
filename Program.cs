@@ -71,7 +71,7 @@ namespace BigBadCat //My Wumpus World implementation
             {
                 Console.WriteLine("Please enter your nickname: "); //asking and saving players name
                 playerName = Console.ReadLine();
-                if (playerName == "") //if no input for name assign default name for player
+                if (playerName == "" || playerName.Contains(':')) //if no input for name or invalid name, assign default name for player
                     playerName = "DefaultPlayer";
                 Console.Clear(); //clear console
 
